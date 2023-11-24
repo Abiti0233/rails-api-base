@@ -1,0 +1,44 @@
+.header {
+  background: #1b5678;
+  height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  gap: 60vw;
+}
+
+.logo {
+  text-decoration: none;
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.button {
+  width: 152px;
+  height: 53px;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+  color: #000000BF;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}

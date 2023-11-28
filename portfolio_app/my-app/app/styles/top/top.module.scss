@@ -1,0 +1,58 @@
+.top {
+  height: 1278px;
+  width: 1440px;
+  margin: 0 auto;
+}
+.circle {
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background-color: #C4C4C4;
+}
+
+.profile {
+  display: flex;
+  justify-content: left;
+  margin-left: 170px;
+  margin-top: 10vh;
+  gap: 5vw;
+  margin-bottom: 100px;
+}
+
+.profileTitle {
+  border-bottom: 2px black solid;
+  padding-bottom: 1vh;
+  margin: 0;
+}
+
+.sampleFont {
+  color: red;
+  font-size: 15px;
+}
+
+.titleDiv {
+  width: 13vw;
+  margin-bottom: 35px;
+}
+
+.skills {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.skillTitle {
+  border-bottom: 2px black solid;
+  padding-bottom: 1.5vh;
+}
+
+.skillTitleDiv {
+  width: 470px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.skillChart {
+  height: 500px;
+  width: 1046px;
+}

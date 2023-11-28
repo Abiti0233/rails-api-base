@@ -9,7 +9,8 @@
 
 .list {
   display: flex;
-  gap: 70vw;
+  gap: 50vw;
+  justify-content: space-between;
 }
 
 .logo {
@@ -24,8 +25,21 @@
   width: 152px;
   height: 53px;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 90%;
   text-decoration: none;
   display: inline-block;
   color: #000000BF;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }

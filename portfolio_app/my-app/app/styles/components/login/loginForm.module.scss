@@ -16,10 +16,13 @@
   border-right: none;
   border-left: none;
   border-top: none;
-  margin-bottom: 70px;
   outline: none;
   font-size: 18px;
   color: #333333;
+}
+
+.inputContent {
+  margin-bottom: 50px;
 }
 
 .loginTitle {
@@ -39,9 +42,18 @@
   background-color: #1B5678;
   color: white;
   margin: 0 auto;
+  margin-top: 30px;
 }
 
 .label {
   color: #999999;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  color: red;
+  font-size: 5px;
+  margin-bottom: 0;
 }

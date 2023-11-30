@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "app/top/page.tsx",
     "app/components/features/top/skillChart.tsx"
-  ],
+, "app/lib/UsersData.tsx", "app/page.tsx", "app/components/features/login/loginForm.tsx"  ],
   "exclude": ["node_modules"]
 }

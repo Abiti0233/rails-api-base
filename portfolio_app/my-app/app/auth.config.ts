@@ -5,10 +5,8 @@ export const authConfig: NextAuthConfig = {
   providers: [
     Credentials({
       async authorize(credentials) {
-        // await new Promise((resolve) => setTimeout(resolve, 5000));
-
         const email = "user@nextemail.com";
-        return credentials.email === email && credentials.password === "123456"
+        return credentials.email === email && credentials.password === "1234567891"
           ? { id: "userId", email }
           : null;
       },
@@ -25,6 +23,7 @@ export const authConfig: NextAuthConfig = {
         if (isLoggedIn) return true;
         return false;
       } else if (isLoggedIn) {
+        console.log("ログインしました！")
         return Response.redirect(new URL("/dashboard", nextUrl));
       }
       return true;

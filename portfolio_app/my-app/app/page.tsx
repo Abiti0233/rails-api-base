@@ -1,21 +1,26 @@
-import Footer from '../app/components/ui/header';
-import Header from '../app/components/ui/footer';
-import Styles from '../app/styles/top/top.module.scss';
+"use client";
 
-export default function Page() {
+import React, { useEffect } from "react";
+import { getUserData } from "./lib/UsersData";
+
+const HomePage: React.FC = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getUserData();
+        console.log("Data", data);
+      } catch (error) {
+        console.log("error;", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
-    <Header/>
-    <div className="introduction">
-      <div className={Styles.circle}>
-
-      </div>
-      <div className="introduction">
-        <h1>自己紹介</h1>
-        <p>ログインして、自己紹介文と画像を登録しましょう！</p>
-      </div>
-    </div>
-    <Footer />
+      <div>Hello World</div>
     </>
   );
-}
+};
+
+export default HomePage;

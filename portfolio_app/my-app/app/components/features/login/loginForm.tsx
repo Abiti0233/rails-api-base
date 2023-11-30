@@ -1,21 +1,72 @@
 "use client";
 
+import { useForm, SubmitHandler } from "react-hook-form";
 import { authenticate } from "../../../login/action";
 import { useFormState, useFormStatus } from "react-dom";
 import Styles from "../../../styles/components/login/loginForm.module.scss";
 
+type Inputs = {
+  email: string;
+  password: string;
+};
+
 export default function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const email = watch("email");
+
   const [state, formAction] = useFormState(authenticate, true);
   return (
     <div>
       <h1 className={Styles.loginTitle}>ログイン</h1>
       <div className={Styles.loginForm}>
-        <form action={formAction} className={Styles.form}>
-          <label className={Styles.label}>メールアドレス</label>
-          <input type="email" name="email" className={Styles.input}/>
-          <label className={Styles.label}>パスワード</label>
-          <input type="password" name="password" className={Styles.input}/>
-          <SubmitButton css={Styles.loginButton}/>
+        <form
+          // action={formAction}
+          // onSubmit={handleSubmit(onSubmit)}
+          className={Styles.form}
+        >
+          <div className={Styles.inputContent}>
+            <label className={Styles.label}>
+              <span>メールアドレス</span>
+              <input
+                className={Styles.input}
+                {...register("email", {
+                  required: "メールアドレスを入力してください。",
+                  pattern: {
+                    value: /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
+                    message: "メールアドレスを正しく入力してください。"
+                  }
+                })}
+              />
+            </label>
+            {errors.email?.message && (
+              <p className={Styles.error}>{errors.email?.message}</p>
+            )}
+          </div>
+          <label className={Styles.label}>
+            <span>パスワード</span>
+            <input
+              type="password"
+              className={Styles.input}
+              {...register("password", {
+                required: "パスワードを入力してください。",
+                minLength: {
+                  value: 10,
+                  message: "10文字以上で入力してください。",
+                },
+              })}
+            />
+          </label>
+          {errors.password?.message && (
+            <p className={Styles.error}>{errors.password?.message}</p>
+          )}
+          <SubmitButton css={Styles.loginButton} action={formAction} />
         </form>
       </div>
     </div>
@@ -24,12 +75,13 @@ export default function LoginForm() {
 
 type Props = {
   css: string;
+  action: (payload: FormData) => void;
 };
 
-function SubmitButton({ css }: Props) {
+function SubmitButton({ css, action }: Props) {
   const { pending } = useFormStatus();
   return (
-    <button aria-disabled={pending} className={css}>
+    <button aria-disabled={pending} className={css} formAction={action}>
       {pending ? "ログイン中" : "ログインする"}
     </button>
   );

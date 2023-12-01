@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import React from "react";
 import Styles from "../../styles/components/loginHeader.module.scss";
@@ -19,14 +21,14 @@ export default function LoginHeader() {
           </Link>
         </div>
         <div className={Styles.left}>
-          <Link className={Styles.loginLink} href="#">
+          <Link className={Styles.loginLink} href="/dashboard/profileEdit">
             プロフィール編集
           </Link>
-          <Link className={Styles.loginLink} href="#">
+          <Link className={Styles.loginLink} href="/dashboard/skillEdit">
             スキル編集
           </Link>
           <form action={async () => {
-            'use server'
+            // 'use server'
             await signOut()
           }}
           >

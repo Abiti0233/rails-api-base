@@ -1,3 +1,5 @@
+'use server'
+
 import NextAuth from "next-auth";
 import { authConfig } from "./app/auth.config";
 import CredentialsProvider from "next-auth/providers/credentials";

@@ -1,10 +1,17 @@
+import axios from "axios";
 import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authConfig: NextAuthConfig = {
   providers: [
-    Credentials({
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: {label: "メールアドレス", type: "email"},
+        password: {label: "パスワード", type: "password"},
+      },
       async authorize(credentials) {
+        const user = getUserData();
         const email = "user@nextemail.com";
         return credentials.email === email && credentials.password === "1234567891"
           ? { id: "userId", email }
@@ -30,3 +37,18 @@ export const authConfig: NextAuthConfig = {
     },
   },
 };
+
+const getUserData = async () => {
+  const url = "http://localhost:3000/api/v1/users";
+    try {
+      const response = await axios.get(url, {
+        // headers: {
+        //   // Authorization: `Bearer ${token}`
+        // }
+      });
+      console.log(response)
+      return response.data;
+    } catch (error: any) {
+        // console.log("AxiosError:", error.message);
+      }
+}

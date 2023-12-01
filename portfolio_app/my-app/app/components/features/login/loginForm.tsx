@@ -17,20 +17,23 @@ export default function LoginForm() {
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  const onSubmit = (data: Inputs) => {
+    authenticate(data);
+
+    console.log(data);
+
+    return "ほげ";
+  };
 
   const email = watch("email");
 
-  const [state, formAction] = useFormState(authenticate, true);
+  // const [state, formAction] = useFormState(authenticate, true);
   return (
     <div>
       <h1 className={Styles.loginTitle}>ログイン</h1>
       <div className={Styles.loginForm}>
-        <form
-          // action={formAction}
-          // onSubmit={handleSubmit(onSubmit)}
-          className={Styles.form}
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className={Styles.form}>
           <div className={Styles.inputContent}>
             <label className={Styles.label}>
               <span>メールアドレス</span>
@@ -39,9 +42,10 @@ export default function LoginForm() {
                 {...register("email", {
                   required: "メールアドレスを入力してください。",
                   pattern: {
-                    value: /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
-                    message: "メールアドレスを正しく入力してください。"
-                  }
+                    value:
+                      /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/,
+                    message: "メールアドレスを正しく入力してください。",
+                  },
                 })}
               />
             </label>
@@ -66,7 +70,7 @@ export default function LoginForm() {
           {errors.password?.message && (
             <p className={Styles.error}>{errors.password?.message}</p>
           )}
-          <SubmitButton css={Styles.loginButton} action={formAction} />
+          <SubmitButton css={Styles.loginButton} />
         </form>
       </div>
     </div>
@@ -75,13 +79,12 @@ export default function LoginForm() {
 
 type Props = {
   css: string;
-  action: (payload: FormData) => void;
 };
 
-function SubmitButton({ css, action }: Props) {
+function SubmitButton({ css }: Props) {
   const { pending } = useFormStatus();
   return (
-    <button aria-disabled={pending} className={css} formAction={action}>
+    <button aria-disabled={pending} className={css} type="submit">
       {pending ? "ログイン中" : "ログインする"}
     </button>
   );

@@ -2,10 +2,18 @@
 
 import { signIn } from "../../auth";
 
-export async function authenticate(prevState: boolean, formData: FormData) {
+type Inputs = {
+  email: string;
+  password: string;
+};
+
+export async function authenticate(data: Inputs) {
   try {
-    console.log(formData);
-    await signIn("credentials", Object.fromEntries(formData));
+    console.log(data);
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+    });
     return true;
   } catch (error) {
     if ((error as Error).message.includes("CredentialsSignin")) {
